@@ -1,4 +1,4 @@
-package com.example.randomusers
+package com.magnise.random_users
 
 import org.junit.Test
 

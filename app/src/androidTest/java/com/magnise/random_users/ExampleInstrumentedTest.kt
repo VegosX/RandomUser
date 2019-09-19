@@ -1,4 +1,4 @@
-package com.example.randomusers
+package com.magnise.random_users
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">RandomUsers</string>
+    <string name="home_page">HOME</string>
+    <string name="profile_page">PROFILE</string>
 </resources>
