@@ -1,7 +1,6 @@
 package com.magnise.random_users
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.magnise.random_users.ui.UserAdapter
 import com.magnise.random_users.ui.UserViewModel
 import kotlinx.android.synthetic.main.fragment_user.*
-import kotlinx.android.synthetic.main.item_user.*
 
 class MainFragment : Fragment() {
 
@@ -32,7 +30,7 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         prepareViewModel()
         rvEditorChoise.apply {
-            layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+            layoutManager = activity?.let { LinearLayoutManager(it, RecyclerView.VERTICAL, false) }     //Here can be error
             adapter = this@MainFragment.userAdapter
         }
     }
@@ -40,7 +38,7 @@ class MainFragment : Fragment() {
     private fun prepareViewModel() {
         viewModel = ViewModelProviders.of(this)[UserViewModel::class.java]
 
-        viewModel.user.observe(this, Observer {
+        viewModel.sendListToFragment.observe(this, Observer {
             it?.let {
                 userAdapter.refreshData(it)
                 userAdapter.notifyDataSetChanged()
