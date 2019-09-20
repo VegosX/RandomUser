@@ -1,6 +1,7 @@
 package com.magnise.random_users.ui
 
 //import UserModelCopy
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.magnise.random_users.model.api.Results
@@ -10,6 +11,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.IOException
+import java.util.*
 
 class UserViewModel : ViewModel() {
     //Live data to send data to fragment -> MainFragment
@@ -22,14 +24,10 @@ class UserViewModel : ViewModel() {
     }
 
 
-
-
     //Realize
     private fun loadUsers() {
         val requestUserCall = UsersDataSource.getUsers()
         requestUserCall.enqueue(object : Callback<UserModel> {
-
-
 
             //If good response ☻ ->
             //we give getModel to UserModelCopy
@@ -38,6 +36,9 @@ class UserViewModel : ViewModel() {
                 response: Response<UserModel>
             ) {
                 response.body()?.let { userModel ->
+                    for (o : Results in userModel.results){
+                        Log.d("UserModel.result -> ", o.toString())
+                    }
                     sendListToFragment.value = userModel.results
                 }
             }

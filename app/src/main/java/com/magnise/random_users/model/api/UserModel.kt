@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 //This model is for getting fields from server to UserDataSource ->
 
 data class UserModel(
-    @SerializedName("sendListToFragment")
+    @SerializedName("results")
     val results: List<Results>,
     @SerializedName("info")
     val info: Infos
@@ -14,7 +14,7 @@ data class UserModel(
 data class Infos (
     @SerializedName("seed")
     val seed: String,
-    @SerializedName("sendListToFragment")
+    @SerializedName("results")
     val results: Long,
     @SerializedName("page")
     val page: Long,

@@ -16,7 +16,7 @@ object UsersDataSource {
     private const val URL = "https://randomuser.me/api/"
 
     //basic gson, retrogit and okHttp connection
-    private val gson by lazy {
+    private val json by lazy {
         GsonBuilder()
             .setLenient()
             .create()
@@ -32,7 +32,7 @@ object UsersDataSource {
         Retrofit.Builder()
             .baseUrl(URL)
             .client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create(gson))
+            .addConverterFactory(GsonConverterFactory.create(json))
             .build()
     }
 
