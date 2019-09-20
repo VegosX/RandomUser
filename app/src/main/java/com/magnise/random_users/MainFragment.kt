@@ -30,7 +30,7 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         prepareViewModel()
         rvEditorChoise.apply {
-            layoutManager = activity?.let { LinearLayoutManager(it, RecyclerView.VERTICAL, false) }     //Here can be error
+            layoutManager = activity?.let { LinearLayoutManager(it, RecyclerView.VERTICAL, false) }
             adapter = this@MainFragment.userAdapter
         }
     }

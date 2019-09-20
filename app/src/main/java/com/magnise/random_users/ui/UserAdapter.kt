@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.magnise.random_users.R
 import com.magnise.random_users.model.api.Results
-import com.magnise.random_users.model.api.UserModel
 import kotlinx.android.synthetic.main.item_user.view.*
 
 //Adapter
@@ -37,10 +36,20 @@ class UserAdapter : RecyclerView.Adapter<InformationViewHolder>() {
 class InformationViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
     RecyclerView.ViewHolder(inflater.inflate(R.layout.item_user, parent, false)) {
 
-    private var tvUserName: TextView = itemView.findViewById(R.id.tvUsername)
+    private var tvName: TextView = itemView.findViewById(R.id.tvName)
+    private var tvSurname: TextView = itemView.findViewById(R.id.tvSurname)
+
 
     fun bind(result: Results) {
-        tvUserName.text = result.name.first
+        //Get name and surname and convert first letter to UpperCase
+        var nameUC: String = result.name.first
+        var surnameUC: String = result.name.last
+        nameUC = nameUC.substring(0,1).toUpperCase() + nameUC.substring(1).toLowerCase()
+        surnameUC = surnameUC.substring(0,1).toUpperCase() + surnameUC.substring(1).toLowerCase()
+
+        //Set result to view
+        tvName.text = nameUC
+        tvSurname.text = surnameUC
         Glide.with(itemView.context).load(result.picture.large).into(itemView.ivIcon)
     }
 }
