@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorNightWhite"
-    tools:context=".DetailsFragment">
+    android:background="@color/colorDarkWhite"
+    tools:context=".InformationActivity">
 
     <View
         android:id="@+id/line4"
@@ -24,25 +24,21 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="1dp"
-        android:text="Male"
-        android:textColor="@color/colorBlack"
-        android:textSize="17dp"
-        android:textStyle="bold"
+        android:textColor="@color/colorGray"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvGender" />
 
     <TextView
-        android:id="@+id/tvPasswordSpace"
+        android:id="@+id/tvAgeSpace"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="1dp"
-        android:text="**********"
-        android:textColor="@color/colorBlack"
-        android:textSize="17dp"
-        android:textStyle="bold"
+        android:textColor="@color/colorGray"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/tvAge" />
 
     <TextView
         android:id="@+id/tvGender"
@@ -55,12 +51,12 @@
         app:layout_constraintTop_toBottomOf="@+id/line3" />
 
     <TextView
-        android:id="@+id/tvPassword"
+        android:id="@+id/tvAge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="5dp"
-        android:text="password"
+        android:text="age"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/line4" />
 
@@ -70,10 +66,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="1dp"
-        android:text="vegosx@gmail.com"
-        android:textColor="@color/colorBlack"
-        android:textSize="17dp"
-        android:textStyle="bold"
+        android:textColor="@color/colorGray"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
 
@@ -92,35 +86,38 @@
         android:id="@+id/line5"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="5dp"
         android:background="@color/colorWhite"
+        app:layout_constraintBottom_toBottomOf="@+id/tvAgeSpace"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPasswordSpace" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/ivIcon"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="80dp"
+        android:transitionName="ivIcon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
         tools:src="@drawable/ic_boy" />
 
+
     <TextView
-        android:id="@+id/tvNameSurname"
+        android:id="@+id/tvUsernameSpace"
+        android:transitionName="tvUsernameSpace"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:text="Name Surname"
-        android:textSize="25dp"
-        android:textStyle="bold"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="26dp"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:textColor="@color/colorGray"
+        app:layout_constraintBottom_toTopOf="@+id/line1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivIcon" />
-
 
     <View
         android:id="@+id/line1"
@@ -130,7 +127,7 @@
         android:background="@color/colorWhite"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvNameSurname" />
+        app:layout_constraintTop_toBottomOf="@+id/tvUsernameSpace" />
 
 
     <View
@@ -170,12 +167,24 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="1dp"
-        android:text="+380982511775"
-        android:textColor="@color/colorBlack"
-        android:textSize="17dp"
-        android:textStyle="bold"
+        android:textColor="@color/colorGray"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvPhone" />
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorGray"
+        tools:ignore="MissingConstraints">
 
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:background="@drawable/ic_left_arrow"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="16dp" />
+    </androidx.appcompat.widget.Toolbar>
 </androidx.constraintlayout.widget.ConstraintLayout>

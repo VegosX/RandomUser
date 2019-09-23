@@ -2,8 +2,6 @@ package com.magnise.random_users.model.api
 
 import com.google.gson.annotations.SerializedName
 
-//This model is for getting fields from server to UserDataSource ->
-
 data class UserModel(
     @SerializedName("results")
     val results: List<Results>,
@@ -26,7 +24,15 @@ data class Results (
     @SerializedName("name")
     val name: Names,
     @SerializedName("picture")
-    val picture: Pictures
+    val picture: Pictures,
+    @SerializedName("gender")
+    val gender: String,
+    @SerializedName("email")
+    val email: String,
+    @SerializedName("phone")
+    val phone: String,
+    @SerializedName("dob")
+    val dob: Dob
 )
 
 data class Names (
@@ -40,5 +46,12 @@ data class Names (
 
 data class Pictures (
     @SerializedName("large")
-    val large: String
+    val large: String,
+    @SerializedName("medium")
+    val medium: String
+)
+
+data class Dob (
+    @SerializedName("age")
+    val age: Int
 )

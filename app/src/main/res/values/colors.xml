@@ -4,8 +4,8 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="colorGray">#202020</color>
-    <color name="colorWhite">#F9F9F9</color>
-    <color name="colorDarkWhite">#F3F3F3</color>
+    <color name="colorWhite">#FFF</color>
+    <color name="colorDarkWhite">#F7F7F7</color>
     <color name="colorNightWhite">#D5D5D5</color>
     <color name="colorBlack">#000</color>
 </resources>
