@@ -6,6 +6,6 @@ import retrofit2.http.GET
 
 interface UsersApiService {
 
-    @GET("?results=30")
+    @GET("?results=100")
     fun getUsers(): Call<UserModel>
 }

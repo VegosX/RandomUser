@@ -3,8 +3,11 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="colorGray">#202020</color>
+    <color name="colorDarkGray">#202020</color>
+    <color name="colorGray">#C8C8C8</color>
+    <color name="colorGrayMint">#434D4E</color>
     <color name="colorWhite">#FFF</color>
+    <color name="colorWhiteCream">#F2F2F2</color>
     <color name="colorDarkWhite">#F7F7F7</color>
     <color name="colorNightWhite">#D5D5D5</color>
     <color name="colorBlack">#000</color>
