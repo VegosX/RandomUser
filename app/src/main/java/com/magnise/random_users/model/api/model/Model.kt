@@ -1,15 +1,15 @@
-package com.magnise.random_users.model.api
+package com.magnise.random_users.model.api.model
 
 import com.google.gson.annotations.SerializedName
 
-data class UserModel(
+data class Model(
     @SerializedName("results")
-    val results: List<Results>,
+    val results: List<UserModel>,
     @SerializedName("info")
-    val info: Infos
+    val info: Info
 )
 
-data class Infos (
+data class Info (
     @SerializedName("seed")
     val seed: String,
     @SerializedName("results")
@@ -20,11 +20,11 @@ data class Infos (
     val version: String
 )
 
-data class Results (
+data class UserModel (
     @SerializedName("name")
-    val name: Names,
+    val name: Name,
     @SerializedName("picture")
-    val picture: Pictures,
+    val picture: Picture,
     @SerializedName("gender")
     val gender: String,
     @SerializedName("email")
@@ -35,7 +35,7 @@ data class Results (
     val dob: Dob
 )
 
-data class Names (
+data class Name (
     @SerializedName("title")
     val title: String,
     @SerializedName("first")
@@ -44,7 +44,7 @@ data class Names (
     val last: String
 )
 
-data class Pictures (
+data class Picture (
     @SerializedName("large")
     val large: String,
     @SerializedName("medium")

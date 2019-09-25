@@ -16,7 +16,13 @@ import kotlinx.android.synthetic.main.fragment_user.*
 
 class MainFragment : Fragment() {
 
-    private val userAdapter by lazy { UserAdapter() }
+    private val loadMOreListener = object : UserAdapter.LoadMoreListener{
+        override fun loadMoreUsers() {
+            viewModel.loadMoreUsers()
+        }
+    }
+
+    private val userAdapter by lazy { UserAdapter(loadMOreListener) }
     private lateinit var viewModel: UserViewModel
 
     override fun onCreateView(
@@ -38,7 +44,7 @@ class MainFragment : Fragment() {
     private fun prepareViewModel() {
         viewModel = ViewModelProviders.of(this)[UserViewModel::class.java]
 
-        viewModel.sendListToFragment.observe(this, Observer {
+        viewModel.userList.observe(this, Observer {
             it?.let {
                 userAdapter.refreshData(it)
                 userAdapter.notifyDataSetChanged()

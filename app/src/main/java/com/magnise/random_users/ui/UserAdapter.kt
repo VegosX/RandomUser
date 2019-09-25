@@ -2,20 +2,30 @@ package com.magnise.random_users.ui
 
 import android.app.Activity
 import android.app.ActivityOptions
+import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.magnise.random_users.InformationActivity
+import com.magnise.random_users.MainActivity
+import com.magnise.random_users.MainFragment
 import com.magnise.random_users.R
-import com.magnise.random_users.model.api.Results
+import com.magnise.random_users.model.api.model.UserModel
 import kotlinx.android.synthetic.main.item_user.view.*
 
-class UserAdapter : RecyclerView.Adapter<InformationViewHolder>() {
-    private var list: List<Results> = listOf()
+class UserAdapter(private val listener: LoadMoreListener) : RecyclerView.Adapter<InformationViewHolder>() {
+
+    interface LoadMoreListener {
+        fun loadMoreUsers()
+    }
+
+    private var list: List<UserModel> = listOf()
     override fun getItemCount(): Int = list.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InformationViewHolder {
@@ -26,14 +36,17 @@ class UserAdapter : RecyclerView.Adapter<InformationViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: InformationViewHolder, position: Int) {
-        val view: Results = list[position]
+        if ((itemCount - position) <= 5) {
+            listener.loadMoreUsers()
+        }
+        val view: UserModel = list[position]
         holder.bind(view)
         holder.itemView.setOnClickListener {
             holder.onClick(it, view)
         }
     }
 
-    fun refreshData(list: List<Results>) {
+    fun refreshData(list: List<UserModel>) {
         this.list = list
     }
 }
@@ -44,7 +57,7 @@ class InformationViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
     private var tvName: TextView = itemView.findViewById(R.id.tvName)
     private var tvSurname: TextView = itemView.findViewById(R.id.tvSurname)
 
-    fun bind(result: Results) {
+    fun bind(result: UserModel) {
         var nameUC: String = result.name.first
         var surnameUC: String = result.name.last
         nameUC = nameUC.substring(0,1).toUpperCase() + nameUC.substring(1).toLowerCase()
@@ -55,7 +68,7 @@ class InformationViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         Glide.with(itemView.context).load(result.picture.large).into(itemView.ivIcon)
     }
 
-    fun onClick(view: View, result: Results){
+    fun onClick(view: View, result: UserModel){
         val intent = Intent(view.context, InformationActivity::class.java)
         intent.putExtra("username", result.name.first.toUpperCase() + "   " + result.name.last.toUpperCase())
         intent.putExtra("lastName", result.name.last)

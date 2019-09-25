@@ -1,60 +1,78 @@
 package com.magnise.random_users.ui
 
-//import UserModelCopy
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.magnise.random_users.model.api.Results
-import com.magnise.random_users.model.api.UserModel
+import androidx.recyclerview.widget.RecyclerView
 import com.magnise.random_users.model.api.datasource.UsersDataSource
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.magnise.random_users.model.api.model.Model
+import com.magnise.random_users.model.api.model.UserModel
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
+import org.jetbrains.annotations.NotNull
 import java.io.IOException
-import java.util.*
 
 class UserViewModel : ViewModel() {
-    //Live data to send data to fragment -> MainFragment
     val onErrorLoad = MutableLiveData<Boolean>()
     val onErrorMessage = MutableLiveData<String>()
-    var sendListToFragment: MutableLiveData<List<Results>> = MutableLiveData()
+    var userList: MutableLiveData<MutableList<UserModel>> = MutableLiveData()
+
+    private var myCompositeDisposable: CompositeDisposable = CompositeDisposable()
+    private var paginationDisposable: Disposable? = null
+    private var page = 1
+    private var isAllUsersLoaded = false
+    private val pageSize = 10
 
     init {
         loadUsers()
     }
 
+    fun loadMoreUsers() {
+        if (paginationDisposable != null || isAllUsersLoaded) return
+        page++
+        loadUsers()
+    }
 
-    //Realize
     private fun loadUsers() {
-        val requestUserCall = UsersDataSource.getUsers()
-        requestUserCall.enqueue(object : Callback<UserModel> {
+        val disposable =  UsersDataSource.getUsers(page, pageSize, "seedValue")
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+            .subscribe(this::handleResponse, this::handleError)
+        paginationDisposable = disposable
+        myCompositeDisposable.add(disposable)
+    }
 
-            //If good response ☻ ->
-            //we give getModel to UserModelCopy
-            override fun onResponse(
-                call: Call<UserModel>,
-                response: Response<UserModel>
-            ) {
-                response.body()?.let { userModel ->
-                    for (o : Results in userModel.results){
-                        Log.d("UserModel.result -> ", o.toString())
-                    }
-                    sendListToFragment.value = userModel.results
-                }
-            }
+    private fun handleResponse(userModel: Model) {
+        for (o : UserModel in userModel.results){
+            Log.d("Model.result -> ", o.toString())
+        }
+        val oldUsers = userList.value ?: mutableListOf()
+        oldUsers.addAll(userModel.results)
 
+        userList.value = oldUsers
 
+        if (userModel.results.size < pageSize) {
+            isAllUsersLoaded = true
+        }
+        paginationDisposable = null
+    }
 
-            //If bad response ->
-            override fun onFailure(call: Call<UserModel>, t: Throwable) {
-                t.printStackTrace()
-                onErrorLoad.value = true
-                onErrorMessage.value = when (t) {
-                    is IOException -> "Network error try again later"
-                    else -> "Try again later"
-                }
-            }
-        })
+    private fun handleError(error: Throwable){
+        error.printStackTrace()
+        onErrorLoad.value = true
+        onErrorMessage.value = when (error) {
+            is IOException -> "Network error try again later"
+            else -> "Try again later"
+        }
+
+        paginationDisposable = null
+    }
+
+    override fun onCleared() {
+        myCompositeDisposable.clear()
+        super.onCleared()
     }
 }
 
