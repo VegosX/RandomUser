@@ -1,8 +1,11 @@
 package com.magnise.random_users
 
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import kotlinx.android.synthetic.main.fragment_user.*
 
 class MainActivity : FragmentActivity(), MainView  {
 

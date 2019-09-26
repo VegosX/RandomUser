@@ -18,6 +18,7 @@ import com.magnise.random_users.MainFragment
 import com.magnise.random_users.R
 import com.magnise.random_users.model.api.model.UserModel
 import kotlinx.android.synthetic.main.item_user.view.*
+import kotlin.time.toDuration
 
 class UserAdapter(private val listener: LoadMoreListener) : RecyclerView.Adapter<InformationViewHolder>() {
 
@@ -65,6 +66,7 @@ class InformationViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
 
         tvName.text = nameUC
         tvSurname.text = surnameUC
+//        itemView.animate().rotationYBy(10f)
         Glide.with(itemView.context).load(result.picture.large).into(itemView.ivIcon)
     }
 
