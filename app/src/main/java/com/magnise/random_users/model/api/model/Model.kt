@@ -1,6 +1,7 @@
 package com.magnise.random_users.model.api.model
 
 import com.google.gson.annotations.SerializedName
+import java.util.*
 
 data class Model(
     @SerializedName("results")
@@ -52,6 +53,8 @@ data class Picture (
 )
 
 data class Dob (
+    @SerializedName("date")
+    val date: String,
     @SerializedName("age")
     val age: Int
 )

@@ -66,7 +66,6 @@ class InformationViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
 
         tvName.text = nameUC
         tvSurname.text = surnameUC
-//        itemView.animate().rotationYBy(10f)
         Glide.with(itemView.context).load(result.picture.large).into(itemView.ivIcon)
     }
 
@@ -79,6 +78,7 @@ class InformationViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         intent.putExtra("gender", result.gender)
         intent.putExtra("age", result.dob.age.toString())
         intent.putExtra("image", result.picture.large)
+        intent.putExtra("date", result.dob.date)
 
         val activityOptions = ActivityOptions.makeSceneTransitionAnimation(
             view.context as Activity?,
