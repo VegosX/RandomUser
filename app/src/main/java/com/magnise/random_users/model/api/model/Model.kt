@@ -1,7 +1,8 @@
 package com.magnise.random_users.model.api.model
 
 import com.google.gson.annotations.SerializedName
-import java.util.*
+import com.magnise.random_users.ui.BaseModel
+import com.magnise.random_users.ui.Constants
 
 data class Model(
     @SerializedName("results")
@@ -34,7 +35,11 @@ data class UserModel (
     val phone: String,
     @SerializedName("dob")
     val dob: Dob
-)
+): BaseModel {
+    override fun getViewType(): Int {
+        return Constants.ViewType.USER_TYPE
+    }
+}
 
 data class Name (
     @SerializedName("title")

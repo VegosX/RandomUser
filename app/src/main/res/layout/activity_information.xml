@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorDarkWhite"
+    android:background="@color/colorWhite"
     tools:context=".InformationActivity">
 
 
@@ -38,44 +38,39 @@
         app:layout_constraintTop_toBottomOf="@+id/ivIcon" />
 
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:background="@color/colorWhiteCream"
+        android:layout_marginTop="56dp"
+        android:background="@drawable/shape_info"
         android:orientation="vertical"
+        android:elevation="4dp"
+        android:translationZ="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvUsernameSpace">
 
-        <View
-            android:id="@+id/line1"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/colorDarkWhite"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvGenderSpace" />
 
         <TextView
             android:id="@+id/tvEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="20dp"
             android:text="email"
             android:textColor="@color/colorGray"
-
-
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvEmailSpace"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="1dp"
+            android:layout_marginTop="5dp"
             android:text="Email"
             android:textColor="@color/colorGrayMint"
             android:textSize="18sp"
@@ -86,13 +81,12 @@
             android:id="@+id/line2"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:background="@color/colorDarkWhite"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvGenderSpace" />
-
+            app:layout_constraintTop_toBottomOf="@+id/tvDateSpace" />
 
         <TextView
             android:id="@+id/tvGender"
@@ -103,17 +97,19 @@
             android:text="gender"
             android:textColor="@color/colorGray"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/line3" />
+            app:layout_constraintTop_toBottomOf="@+id/line2" />
 
         <TextView
             android:id="@+id/tvGenderSpace"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="1dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="20dp"
             android:text="Gender"
             android:textColor="@color/colorGrayMint"
             android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvGender" />
 
@@ -121,12 +117,12 @@
             android:id="@+id/line3"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:background="@color/colorDarkWhite"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvGenderSpace" />
+            app:layout_constraintTop_toBottomOf="@+id/tvAgeSpace" />
 
         <TextView
             android:id="@+id/tvAge"
@@ -136,30 +132,32 @@
             android:layout_marginTop="5dp"
             android:text="age"
             android:textColor="@color/colorGray"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/line4" />
 
         <TextView
             android:id="@+id/tvAgeSpace"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="1dp"
+            android:layout_marginTop="5dp"
             android:text="Age"
             android:textColor="@color/colorGrayMint"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvAge" />
 
+
         <View
             android:id="@+id/line4"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:background="@color/colorDarkWhite"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvGenderSpace" />
+            app:layout_constraintTop_toBottomOf="@+id/tvPhoneSpace" />
 
         <TextView
             android:id="@+id/tvPhone"
@@ -170,16 +168,14 @@
             android:text="phone"
             android:textColor="@color/colorGray"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/line1" />
-
+            app:layout_constraintTop_toBottomOf="@+id/line5" />
 
         <TextView
             android:id="@+id/tvPhoneSpace"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="1dp"
-            android:layout_marginBottom="15dp"
+            android:layout_marginTop="5dp"
             android:text="Phone"
             android:textColor="@color/colorGrayMint"
             android:textSize="18sp"
@@ -190,12 +186,12 @@
             android:id="@+id/line5"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:background="@color/colorDarkWhite"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvGenderSpace" />
+            app:layout_constraintTop_toBottomOf="@+id/tvEmailSpace" />
 
         <TextView
             android:id="@+id/tvDate"
@@ -206,32 +202,21 @@
             android:text="date"
             android:textColor="@color/colorGray"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/line1" />
+            app:layout_constraintTop_toBottomOf="@+id/line3" />
 
         <TextView
             android:id="@+id/tvDateSpace"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="1dp"
-            android:layout_marginBottom="15dp"
+            android:layout_marginTop="5dp"
             android:text="27/09/2000"
             android:textColor="@color/colorGrayMint"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvPhone" />
+            app:layout_constraintTop_toBottomOf="@+id/tvDate" />
 
-        <View
-            android:id="@+id/line6"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="10dp"
-            android:background="@color/colorDarkWhite"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvGenderSpace" />
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -242,8 +227,8 @@
 
         <Button
             android:id="@+id/btn_back"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:background="@drawable/ic_left_arrow"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="16dp" />

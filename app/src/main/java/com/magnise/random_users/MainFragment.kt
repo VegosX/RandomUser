@@ -1,28 +1,24 @@
 package com.magnise.random_users
 
 import android.os.Bundle
-import android.text.Layout
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.magnise.random_users.ui.UserAdapter
 import com.magnise.random_users.ui.UserViewModel
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_user.*
 
-class MainFragment : Fragment(){
+class MainFragment : Fragment() {
 
-    private val loadMoreListener = object : UserAdapter.LoadMoreListener{
+    private val loadMoreListener = object : UserAdapter.LoadMoreListener {
         override fun loadMoreUsers() {
             viewModel.loadMoreUsers()
         }
@@ -52,15 +48,23 @@ class MainFragment : Fragment(){
 
         viewModel.userList.observe(this, Observer {
             it?.let {
-                userAdapter.refreshData(it)
-                userAdapter.notifyDataSetChanged()
+                rvList.post {
+                    userAdapter.refreshData(it)
+                    userAdapter.notifyDataSetChanged()
+                }
             }
         })
 
         viewModel.onErrorLoad.observe(this, Observer {
-            rvList.visibility = if (it){View.GONE} else View.VISIBLE
-            ivErrorIcon.visibility = if (it){ImageView.VISIBLE} else ImageView.GONE
-            tvIErrorMessage.visibility = if (it){TextView.VISIBLE} else TextView.GONE
+            rvList.visibility = if (it) {
+                View.GONE
+            } else View.VISIBLE
+            ivErrorIcon.visibility = if (it) {
+                ImageView.VISIBLE
+            } else ImageView.GONE
+            tvIErrorMessage.visibility = if (it) {
+                TextView.VISIBLE
+            } else TextView.GONE
         })
 
         viewModel.showLoading.observe(this, Observer {

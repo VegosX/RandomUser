@@ -1,11 +1,9 @@
 package com.magnise.random_users.ui
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.magnise.random_users.model.api.datasource.UsersDataSource
 import com.magnise.random_users.model.api.model.Model
-import com.magnise.random_users.model.api.model.UserModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
@@ -14,10 +12,10 @@ import java.io.IOException
 
 class UserViewModel : ViewModel() {
     val onErrorLoad = MutableLiveData<Boolean>()
-    val onErrorMessage = MutableLiveData<String>()
+    private val onErrorMessage = MutableLiveData<String>()
     val showLoading = MutableLiveData<Boolean>()
     val onProgress = MutableLiveData<Boolean>()
-    var userList: MutableLiveData<MutableList<UserModel>> = MutableLiveData()
+    var userList: MutableLiveData<MutableList<BaseModel>> = MutableLiveData()
 
     private var myCompositeDisposable: CompositeDisposable = CompositeDisposable()
     private var paginationDisposable: Disposable? = null
@@ -43,11 +41,12 @@ class UserViewModel : ViewModel() {
         loadUsers()
     }
 
-    fun progressBarActivate(){
+    private fun progressBarActivate() {
         onProgress.value = true
     }
 
     private fun loadUsers() {
+        addLoadingItem()
         val disposable = UsersDataSource.getUsers(page, pageSize, "seedValue")
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
@@ -56,19 +55,32 @@ class UserViewModel : ViewModel() {
         myCompositeDisposable.add(disposable)
     }
 
+    private fun addLoadingItem() {
+        val models = userList.value ?: mutableListOf()
+        if (models.isNotEmpty()) {
+            models.add(LoadingItem())
+            userList.value = models
+        }
+    }
+
+    private fun removeLoadingItem(list: MutableList<BaseModel>?): MutableList<BaseModel> {
+        val models = list ?: mutableListOf()
+        if (models.isNotEmpty() && models[models.lastIndex] is LoadingItem)
+            models.removeAt(models.lastIndex)
+        return models
+    }
+
     private fun handleResponse(userModel: Model) {
         onProgress.value = false
-        for (o: UserModel in userModel.results) {
-            Log.d("Model.result -> ", o.toString())
-        }
-        val oldUsers =
+
+        var oldUsers =
             if (page == 1)
                 mutableListOf()
             else
                 userList.value ?: mutableListOf()
 
+        oldUsers = removeLoadingItem(oldUsers)
         oldUsers.addAll(userModel.results)
-
         userList.value = oldUsers
 
         if (userModel.results.size < pageSize) {
@@ -80,6 +92,8 @@ class UserViewModel : ViewModel() {
     }
 
     private fun handleError(error: Throwable) {
+        userList.value = removeLoadingItem(userList.value)
+
         onProgress.value = false
         onErrorLoad.value = true
         error.printStackTrace()
